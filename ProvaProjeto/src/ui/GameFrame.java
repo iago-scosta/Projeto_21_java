@@ -222,7 +222,7 @@ class GameFrame extends JFrame {
         // garantia adicional: o usuário pode digitar um valor no spinner (incluindo negativo)
         try {
             bet = ((Number)spinnerBet.getValue()).doubleValue();
-        } catch (Exception ex) {
+        } catch (ClassCastException ex) {
             lblStatusMessage.setText("Aposta inválida.");
             return;
         }
