@@ -1,5 +1,10 @@
 # Projeto Java Blackjack / vinte-e-um
 
+#### Iago Souza Costa
+#### Davi Todt Dias Moura
+#### Eric Fontes Vieira de Moura
+#### Matheus Araujo Gois Costa
+
 ## Como rodar (versão principal)
 
 
