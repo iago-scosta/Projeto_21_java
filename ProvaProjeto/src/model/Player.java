@@ -21,33 +21,78 @@ public class Player {
         this.balance = balance;
     }
 
-    public String getName() { return name; }
-    public double getBalance() { return balance; }
-    public void addBalance(double v) { balance += v; }
-    public void subBalance(double v) { balance -= v; }
-    public void setHand(Hand h) { hand = h; }
-    public Hand getHand() { return hand; }
+    public String getName() {
+        return name;
+    }
 
-    public void recordBet(double amt) { totalBetAmount += amt; }
-    public double getTotalBetAmount() { return totalBetAmount; }
+    public double getBalance() {
+        return balance;
+    }
+
+    public void addBalance(double v) {
+        balance += v;
+    }
+
+    public void subBalance(double v) {
+        balance -= v; 
+    }
+
+    public void setHand(Hand h) {
+        hand = h;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public void recordBet(double amt) {
+        totalBetAmount += amt;
+    }
+
+    public double getTotalBetAmount() {
+        return totalBetAmount;
+    }
 
     // atualizações de estatísticas
     public void recordWin() {
         totalRounds++; wins++; currentWinStreak++; currentLossStreak = 0;
         if (currentWinStreak > maxWinStreak) maxWinStreak = currentWinStreak;
     }
+
     public void recordLoss() {
         totalRounds++; losses++; currentLossStreak++; currentWinStreak = 0;
         if (currentLossStreak > maxLossStreak) maxLossStreak = currentLossStreak;
     }
-    public void recordPush() { totalRounds++; pushes++; currentWinStreak = 0; currentLossStreak = 0; }
 
-    public int getTotalRounds() { return totalRounds; }
-    public int getWins() { return wins; }
-    public int getLosses() { return losses; }
-    public int getPushes() { return pushes; }
-    public int getMaxWinStreak() { return maxWinStreak; }
-    public int getMaxLossStreak() { return maxLossStreak; }
+    public void recordPush() {
+        totalRounds++; pushes++; currentWinStreak = 0; currentLossStreak = 0;
+    }
 
-    public double getProfit(double startingMoney) { return balance - startingMoney; }
+    public int getTotalRounds() {
+        return totalRounds;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getPushes() {
+        return pushes;
+    }
+
+    public int getMaxWinStreak() {
+        return maxWinStreak;
+    }
+
+    public int getMaxLossStreak() {
+        return maxLossStreak;
+    }
+
+    public double getProfit(double startingMoney) {
+        return balance - startingMoney;
+    }
 }

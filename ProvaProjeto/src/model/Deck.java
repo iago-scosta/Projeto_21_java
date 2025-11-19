@@ -6,7 +6,9 @@ public class Deck {
     private final List<Card> cards = new ArrayList<>();
     private final Random rnd = new Random();
 
-    public Deck() { reset(); }
+    public Deck() {
+        reset(); 
+    }
 
     public final void reset() {
         cards.clear();
@@ -18,7 +20,9 @@ public class Deck {
         shuffle();
     }
 
-    public void shuffle() { Collections.shuffle(cards, rnd); }
+    public void shuffle() {
+        Collections.shuffle(cards, rnd);
+    }
 
     public Card draw() {
         if (cards.isEmpty()) reset();

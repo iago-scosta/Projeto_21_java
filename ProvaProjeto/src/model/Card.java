@@ -15,8 +15,13 @@ public class Card {
         return "cards/" + rank + "_" + suit.name() + ".png";
     }
 
-    public String getRank() { return rank; }
-    public Suit getSuit() { return suit; }
+    public String getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
 
     public int getValue() {
         if ("A".equals(rank)) return 11;

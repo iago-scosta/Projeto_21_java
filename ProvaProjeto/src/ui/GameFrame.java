@@ -23,7 +23,7 @@ class GameFrame extends JFrame {
     private Player player;
     private Dealer dealer = new Dealer();
 
-    // Componentes GUI (nomes mais descritivos)
+    // Componentes GUI 
     private JLabel lblPlayerBalance = new JLabel("Saldo: R$ 0.00");
     private JPanel dealerCardsPanel = new JPanel(new FlowLayout());//imagens
     private JPanel playerCardsPanel = new JPanel(new FlowLayout());//imagens
@@ -49,6 +49,7 @@ class GameFrame extends JFrame {
     private Timer dealerTimer;
     private final List<Card> dealerPendingDraws = new ArrayList<>();
 
+    //interface
     public GameFrame() {
         setTitle("Blackjack");
         setSize(UIConfig.WINDOW_WIDTH, UIConfig.WINDOW_HEIGHT);
@@ -111,7 +112,7 @@ class GameFrame extends JFrame {
 
         add(bottom, BorderLayout.SOUTH);
 
-        // initial state
+        // estado inicial
         btnHit.setEnabled(false);
         btnStand.setEnabled(false);
         btnDouble.setEnabled(false);
@@ -127,7 +128,7 @@ class GameFrame extends JFrame {
         btnSurrender.addActionListener(e -> surrender());
         btnSaveExit.addActionListener(e -> saveAndExit());
 
-        // Initialize dealer timer (used para animação)
+        // inicializar timer do dealer (used para animação)
         dealerTimer = new Timer(UIConfig.DEALER_ANIMATION_DELAY_MS, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,11 +144,11 @@ class GameFrame extends JFrame {
             }
         });
 
-        // ask player for name and starting money
+        // perguntar nome e saldo inicial do player
         SwingUtilities.invokeLater(this::askPlayerInfo);
     }
 
-
+    // imagem das cartas
     private void updateCardImages() {
         // limpa paineis
         dealerCardsPanel.removeAll();
@@ -169,7 +170,7 @@ class GameFrame extends JFrame {
             playerCardsPanel.repaint();
     }
 
-    //imagens
+    //carregar imagens
     private JLabel loadCardImage(String path) {
         ImageIcon icon = new ImageIcon(path);
         Image img = icon.getImage().getScaledInstance(170, 250, Image.SCALE_SMOOTH);
@@ -177,6 +178,7 @@ class GameFrame extends JFrame {
     }
 
 
+    // funcao para perguntar nome e saldo inicial do player 
     private void askPlayerInfo() {
         String name = JOptionPane.showInputDialog(this, "Digite seu nome:", "Nome", JOptionPane.PLAIN_MESSAGE);
         if (name == null || name.trim().isEmpty()) name = "Jogador";
@@ -208,7 +210,7 @@ class GameFrame extends JFrame {
         updateCardImages();
     }
 
-
+    // funcao iniciar rodada
     private void startRound() {
         if (player.getBalance() <= 0) {
             lblStatusMessage.setText("Saldo zerado. Salve e saia ou reabra o jogo.");
@@ -255,7 +257,7 @@ class GameFrame extends JFrame {
         lblStatusMessage.setText("Rodada iniciada. Boa sorte!");
         updateLabels();
 
-        // check initial blackjack (pagamento 1:1 conforme solicitado)
+        // checar blackjac inicial (pagamento 1:1 )
         if (playerHand.isBlackjack()) {
             double totalReceived = currentBet * 2.0; // 1:1 -> recebe aposta + mesmo valor = dobro
             player.addBalance(totalReceived);
@@ -272,7 +274,8 @@ class GameFrame extends JFrame {
             checkBankruptcy();
         }
     }
-
+    
+    // funcao puxar carta
     private void hit() {
         if (!roundActive) return;
         // depois da primeira jogada, surrender não está mais disponível
@@ -297,6 +300,7 @@ class GameFrame extends JFrame {
         }
     }
 
+    // funcao stand / parar
     private void stand() {
         if (!roundActive) return;
         surrenderAvailable = false;
@@ -305,11 +309,12 @@ class GameFrame extends JFrame {
         prepareDealerPlaysAndAnimate();
     }
 
+    // funcao double down (dobrar aposta, puxar uma carta e parar) : pagamento 1:1
     private void doubleDown() {
         if (!roundActive) return;
         if (doubledDown) { lblStatusMessage.setText("Você já deu double."); return; }
         if (player.getBalance() < currentBet) { lblStatusMessage.setText("Saldo insuficiente para dobrar a aposta."); return; }
-        // double the bet: deduct same amount and mark doubled
+        // dobrar aposta: subtrair mesma quantidade e marcar como dobrado
         player.subBalance(currentBet);
         double originalBet = currentBet;
         currentBet *= 2.0; // agora currentBet é o valor total arriscado
@@ -342,6 +347,7 @@ class GameFrame extends JFrame {
         prepareDealerPlaysAndAnimate();
     }
 
+    //funcao all in, aposta maxima
     private void allIn() {
         // só pode definir All-In quando não há rodada ativa
         if (roundActive) {
@@ -362,7 +368,7 @@ class GameFrame extends JFrame {
         lblStatusMessage.setText(String.format("All-In selecionado: R$ %.2f", bal));
     }
 
-
+    // funcao desistir da mao inicial recebe metade da aposta
     private void surrender() {
         if (!roundActive || !surrenderAvailable) {
             lblStatusMessage.setText("Surrender só pode ser usado no começo da rodada, antes de qualquer ação.");
@@ -384,6 +390,7 @@ class GameFrame extends JFrame {
         checkBankruptcy();
     }
 
+    // funcao jogada do dealer (soft 17)
     private void prepareDealerPlaysAndAnimate() {
         // Preenche a lista de cartas que o dealer deverá puxar seguindo a regra:
         // dealer deve comprar enquanto bestValue() < 17 (stand em 17 inclusive)
@@ -429,6 +436,7 @@ class GameFrame extends JFrame {
         }
     }
 
+    //verificar se ganhou double down
     private void resolveRoundDoubleDown() {
         // comparar mãos e aplicar regras de double down (pagamento 1:1 em caso de vitória)
         int p = player.getHand().bestValue();
@@ -462,6 +470,7 @@ class GameFrame extends JFrame {
         endRoundCleanup();
     }
 
+    //ver se ganhou rodada
     private void resolveRound() {
         int p = player.getHand().bestValue();
         int d = dealer.getHand().bestValue();
@@ -494,6 +503,7 @@ class GameFrame extends JFrame {
         endRoundCleanup();
     }
 
+    //resetar UI apos fim de rodada
     private void endRoundCleanup() {
         roundActive = false;
         doubledDown = false;
@@ -509,6 +519,7 @@ class GameFrame extends JFrame {
         checkBankruptcy();
     }
 
+    //verificar se o saldo acabou
     private void checkBankruptcy() {
         if (player.getBalance() <= 0) {
             lblStatusMessage.setText("Saldo zerado. Fim do jogo. Salve seus resultados.");
@@ -517,6 +528,7 @@ class GameFrame extends JFrame {
         }
     }
 
+    // salvar informacoe do player em arquivo de texto
     private void saveAndExit() {
         String name = player.getName();
         double totalInvested = startingMoney;

@@ -5,9 +5,17 @@ import java.util.*;
 public class Hand {
     private final List<Card> cards = new ArrayList<>();
 
-    public void add(Card c) { cards.add(c); }
-    public List<Card> getCards() { return cards; }
-    public void clear() { cards.clear(); }
+    public void add(Card c) {
+        cards.add(c);
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void clear() {
+        cards.clear();
+    }
 
     public int bestValue() {
         int total = 0;
@@ -37,5 +45,7 @@ public class Hand {
         return hasAce && hasTen;
     }
 
-    public boolean isBust() { return bestValue() > 21; }
+    public boolean isBust() {
+        return bestValue() > 21;
+    }
 }
