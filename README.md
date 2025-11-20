@@ -23,7 +23,7 @@ java -cp bin ui.GameMain
 
 
 
-## Como rodar (versão arquivo unico):
+## Como rodar (versão antiga arquivo unico):
 
 ### Dentro do VsCode, abra o terminal e acesse a pasta do projeto:
 
