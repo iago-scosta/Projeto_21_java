@@ -17,6 +17,7 @@ public class Hand {
         cards.clear();
     }
 
+    // valor da mao atual
     public int bestValue() {
         int total = 0;
         int aces = 0;
@@ -27,12 +28,14 @@ public class Hand {
             } else total += c.getValue();
         }
 
+        // As vale 11 por padrao, mas se a soma do as com as demais cartas der acima de 21, o As passa a valer 1
         while (total > 21 && aces > 0) {
             total -= 10; aces--;
         }
         return total;
     }
 
+    // As + carta de valor 10
     public boolean isBlackjack() {
         if (cards.size() != 2) return false;
 
@@ -45,6 +48,7 @@ public class Hand {
         return hasAce && hasTen;
     }
 
+    //checar se perdeu
     public boolean isBust() {
         return bestValue() > 21;
     }

@@ -6,6 +6,9 @@ public class Card {
     private final String rank;
     private final Suit suit;
 
+    // suit = copas , ouros , paus, espadas
+    // rank = A, J, k , Q , 2 3 4 5 etc
+    
     public Card(String rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;

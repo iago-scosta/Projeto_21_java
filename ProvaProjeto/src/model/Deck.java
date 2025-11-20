@@ -10,6 +10,7 @@ public class Deck {
         reset(); 
     }
 
+    // cria um array com todos os valores, depois, para cada valor, cria 4 objetos de carta (ouros, paus, espadas, copas)
     public final void reset() {
         cards.clear();
         String[] ranks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};

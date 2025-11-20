@@ -533,6 +533,9 @@ class GameFrame extends JFrame {
         String name = player.getName();
         double totalInvested = startingMoney;
         double profit = player.getProfit(startingMoney);
+        int wins = player.getWins();
+        int losses = player.getLosses();
+        int empates = player.getPushes();
         int maxW = player.getMaxWinStreak();
         int maxL = player.getMaxLossStreak();
         int rounds = player.getTotalRounds();
@@ -545,6 +548,9 @@ class GameFrame extends JFrame {
         sb.append("Maior sequencia de vitorias: ").append(maxW).append(System.lineSeparator());
         sb.append("Maior sequencia de derrotas: ").append(maxL).append(System.lineSeparator());
         sb.append("Total de rodadas: ").append(rounds).append(System.lineSeparator());
+        sb.append("Total de Vitorias: ").append(wins).append(System.lineSeparator());
+        sb.append("Total de derrotas: ").append(losses).append(System.lineSeparator());
+        sb.append("Total de empates: ").append(empates).append(System.lineSeparator());
         sb.append(String.format(Locale.US, "Porcentagem de vitorias: %.2f%%", winPct)).append(System.lineSeparator());
 
         JFileChooser chooser = new JFileChooser();
