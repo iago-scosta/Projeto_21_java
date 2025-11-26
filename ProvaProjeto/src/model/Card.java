@@ -14,6 +14,7 @@ public class Card {
         this.suit = suit;
     }
 
+    //pega a imagem da carta e separa o naipe e o valor da carta baseado no nome do png
     public String getImagePath() {
         return "cards/" + rank + "_" + suit.name() + ".png";
     }
@@ -26,6 +27,7 @@ public class Card {
         return suit;
     }
 
+    //retorna o valor numerico da carta
     public int getValue() {
         if ("A".equals(rank)) return 11;
         if ("J".equals(rank) || "Q".equals(rank) || "K".equals(rank)) return 10;
