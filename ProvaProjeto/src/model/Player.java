@@ -54,16 +54,19 @@ public class Player {
     }
 
     // atualizações de estatísticas
+    //player ganhou
     public void recordWin() {
         totalRounds++; wins++; currentWinStreak++; currentLossStreak = 0;
         if (currentWinStreak > maxWinStreak) maxWinStreak = currentWinStreak;
     }
-
+     
+    //player perdeu
     public void recordLoss() {
         totalRounds++; losses++; currentLossStreak++; currentWinStreak = 0;
         if (currentLossStreak > maxLossStreak) maxLossStreak = currentLossStreak;
     }
-
+    
+    //player empatou
     public void recordPush() {
         totalRounds++; pushes++; currentWinStreak = 0; currentLossStreak = 0;
     }
@@ -91,7 +94,8 @@ public class Player {
     public int getMaxLossStreak() {
         return maxLossStreak;
     }
-
+    
+    //funcao pra saber o lucro
     public double getProfit(double startingMoney) {
         return balance - startingMoney;
     }
