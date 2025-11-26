@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import model.*;
 
+//armazena a janela e a lógica do jogo 
 
 class GameFrame extends JFrame {
     private Deck deck = new Deck();
