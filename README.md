@@ -14,6 +14,17 @@
 cd ProvaProjeto/
 ```
 
+### Crie a pasta onde ficarão os arquivos compilados:
+
+```
+mkdir bin
+```
+
+### Compile o Codigo:
+
+```
+javac -d bin $(find src -name "*.java")
+```
 
 ### Rode a aplicação:
 
